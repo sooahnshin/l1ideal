@@ -1,0 +1,10 @@
+Package: l1ideal
+Type: Package
+Title: L1 Norm Multidimensional Ideal Point Estimation
+Version: 1.0
+Date: 2019-08-12
+Author: Sooahn Shin, Yohan Lim, and Jong Hee Park
+Maintainer: Sooahn Shin <sooahnshin@g.harvard.edu>
+Description: More about what it does (maybe more than one line)
+License: GPL-2
+RoxygenNote: 6.1.1
