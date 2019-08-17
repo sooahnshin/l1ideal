@@ -1,4 +1,4 @@
-# l1ideal: l1 Norm Multidimensional Ideal Point Estimation
+# l1ideal: L1 Norm Multidimensional Ideal Point Estimation
 [![Build Status](https://travis-ci.com/sooahn/l1ideal.svg?token=yMJkyPKby9ixFy1a4BPp&branch=master)](https://travis-ci.com/sooahn/l1ideal)
 
 ## Authors
