@@ -1,5 +1,5 @@
 # l1ideal: L1 Norm Multidimensional Ideal Point Estimation
-[![Build Status](https://travis-ci.com/sooahn/l1ideal.svg?token=yMJkyPKby9ixFy1a4BPp&branch=master)](https://travis-ci.com/sooahn/l1ideal)
+[![Build Status](https://travis-ci.com/sooahnshin/l1ideal.svg?token=yMJkyPKby9ixFy1a4BPp&branch=master)](https://travis-ci.com/sooahnshin/l1ideal)
 
 ## Authors
 [Sooahn Shin](http://sooahnshin.com/), Yohan Lim, [Jong Hee Park](http://jhp.snu.ac.kr/)
