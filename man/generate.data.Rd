@@ -4,11 +4,26 @@
 \alias{generate.data}
 \title{Generate synthetic data for simulation study}
 \usage{
-generate.data(dimensions = 2, w1 = 0.6, n1 = 40, n2 = 40,
-  n3 = 10, n4 = 10, m = 500, mu1 = c(-0.25, -0.25), mu2 = c(0.25,
-  0.25), mu3 = c(0.75, -0.75), mu4 = c(-0.75, 0.75), sigma1 = 0.02,
-  sigma2 = 0.02, sigma3 = 0.01, sigma4 = 0.01, theta = 1.5,
-  beta = 10, seed = NULL)
+generate.data(
+  dimensions = 2,
+  w1 = 0.6,
+  n1 = 40,
+  n2 = 40,
+  n3 = 10,
+  n4 = 10,
+  m = 500,
+  mu1 = c(-0.25, -0.25),
+  mu2 = c(0.25, 0.25),
+  mu3 = c(0.75, -0.75),
+  mu4 = c(-0.75, 0.75),
+  sigma1 = 0.02,
+  sigma2 = 0.02,
+  sigma3 = 0.01,
+  sigma4 = 0.01,
+  theta = 1.5,
+  beta = 10,
+  seed = NULL
+)
 }
 \arguments{
 \item{dimensions}{}
