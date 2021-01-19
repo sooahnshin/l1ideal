@@ -11,7 +11,7 @@ Sooahn Shin, Johan Lim, and Jong Hee Park. "Multidimensional Ideal Point Estimat
 
 ``` r
 library(devtools)
-install_github("sooahn/l1ideal", dependencies = TRUE, ref = "master")
+install_github("sooahnshin/l1ideal", dependencies = TRUE, ref = "master")
 ```
 
 ## Examples
