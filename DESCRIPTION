@@ -8,3 +8,6 @@ Maintainer: Sooahn Shin <sooahnshin@g.harvard.edu>
 Description: More about what it does (maybe more than one line)
 License: GPL-2
 RoxygenNote: 7.1.1
+Imports: 
+    coda,
+    ggplot2
