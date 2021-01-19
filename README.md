@@ -2,10 +2,10 @@
 [![Build Status](https://travis-ci.com/sooahnshin/l1ideal.svg?token=yMJkyPKby9ixFy1a4BPp&branch=master)](https://travis-ci.com/sooahnshin/l1ideal)
 
 ## Authors
-[Sooahn Shin](http://sooahnshin.com/), Yohan Lim, [Jong Hee Park](http://jhp.snu.ac.kr/)
+[Sooahn Shin](http://sooahnshin.com/), Johan Lim, [Jong Hee Park](http://jhp.snu.ac.kr/)
 
 ## Paper
-Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+Sooahn Shin, Johan Lim, and Jong Hee Park. "Multidimensional Ideal Point Estimation with $\ell_1$ Distance: Model Identification and Posterior Consistency" Working Paper.
 
 ## Installation
 
