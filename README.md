@@ -5,7 +5,7 @@
 [Sooahn Shin](http://sooahnshin.com/), Johan Lim, [Jong Hee Park](http://jhp.snu.ac.kr/)
 
 ## Paper
-Sooahn Shin, Johan Lim, and Jong Hee Park. "Multidimensional Ideal Point Estimation with $\ell_1$ Distance: Model Identification and Posterior Consistency" Working Paper.
+Sooahn Shin, Johan Lim, and Jong Hee Park. "Multidimensional Ideal Point Estimation with L1 Distance: Model Identification and Posterior Consistency" Working Paper.
 
 ## Installation
 
