@@ -9,9 +9,6 @@ multiplot(..., plotlist = NULL, cols = 1, layout = NULL)
 \arguments{
 \item{layout}{}
 }
-\value{
-
-}
 \description{
 Multiple ggplots
 }

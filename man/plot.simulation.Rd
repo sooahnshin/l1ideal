@@ -9,12 +9,9 @@
 \arguments{
 \item{coord_flip}{}
 }
-\value{
-
-}
 \description{
 Plot the simulation study
 }
 \references{
-Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
 }

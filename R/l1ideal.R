@@ -25,7 +25,7 @@
 #' \item{running_time}{The total running time of the estimation.}
 #' 
 #' @import coda
-#' @references Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+#' @references Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
 #' @useDynLib l1ideal, .registration = TRUE
 #' @export l1ideal
 #' @examples
@@ -69,11 +69,11 @@ l1ideal <- function(rollcall,
     nay_code <- rollcall$codes$nay
     na_code <- c(rollcall$codes$notInLegis,rollcall$codes$missing)
     
-    if(any(polarity > nrow(votes))) cat("'polarity' is incorrectly specified")
+    if(any(polarity > nrow(votes))) stop("'polarity' is incorrectly specified")
     
     legis_filtered <- apply(matrix(votes%in%c(yea_code,nay_code),nrow(votes),ncol(votes)),1,sum) >= minvotes
     
-    if(!prod(legis_filtered[polarity])) cat("'polarity' fails minimum vote requirements\n")
+    if(!prod(legis_filtered[polarity])) stop("'polarity' fails minimum vote requirements\n")
     
     lop_denominator <- pmin(apply(matrix(votes%in%yea_code,nrow(votes),ncol(votes)),2,sum),apply(matrix(votes%in%nay_code,nrow(votes),ncol(votes)),2,sum))
     lop_numerator <- apply(matrix(votes%in%c(yea_code,nay_code),nrow(votes),ncol(votes)),2,sum)
@@ -188,13 +188,40 @@ l1ideal <- function(rollcall,
     
 }
 
+#' Postprocess the estimates to maximize the posterior
+#'
+#' @param l1object An object of class \code{l1ideal}
+#' 
+#' @return An object of class \code{l1ideal} where the estimates for legislator ideal points, yea positions, and nay positions are shifted with the value of \Delta^\ast to maximize the posterior.
+#' @references Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+#' @export postprocess.l1ideal
+
+postprocess.l1ideal <- function(l1object){
+    if(class(l1object)!="l1ideal") stop("'l1object' is not of class l1ideal.\n")
+    
+    len <- dim(l1object$legislators[[1]])[1]
+    
+    n <- dim(l1object$legislators[[1]])[2]
+    m <- dim(l1object$yea_positions[[1]])[2]
+    
+    dim <- length(l1object$legislators)
+    
+    for (s in 1:dim) {
+        Delta <- -(rowSums(l1object$legislators[[s]]) + rowSums(l1object$yea_positions[[s]]) + rowSums(l1object$nay_positions[[s]]))/(n+2*m)
+        l1object$legislators[[s]] <- l1object$legislators[[s]] - matrix(Delta, nrow = len, ncol = n)
+        l1object$yea_positions[[s]] <- l1object$yea_positions[[s]] - matrix(Delta, nrow = len, ncol = m)
+        l1object$nay_positions[[s]] <- l1object$nay_positions[[s]] - matrix(Delta, nrow = len, ncol = m)
+    }
+    
+    return(l1object)
+}
 
 #' Summarise the l1ideal object
 #'
 #' @param l1object An object of class \code{l1ideal}
 #' 
 #' @return A data.frame including the mean, standard deviation, and credible interval of each parameter.
-#' @references Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+#' @references Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
 #' @export summary.l1ideal
 
 summary.l1ideal <- function(l1object){
@@ -248,11 +275,12 @@ summary.l1ideal <- function(l1object){
 #' @return A ggplot of ideal points estimated by l1 norm multidimensional ideal point model.
 #' 
 #' @import ggplot2
-#' @references Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+#' @references Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
 #' @export plot.l1ideal
 
 plot.l1ideal <- function(l1object,
-                         group = NULL,
+                         color.group = NULL,
+                         shape.group = NULL,
                          weighted = TRUE) {
     
     if(class(l1object)!="l1ideal") stop("'l1object' is not of class l1ideal.\n")
@@ -260,19 +288,25 @@ plot.l1ideal <- function(l1object,
     dim <- length(l1object$legislators)
     df <- summary.l1ideal(l1object)
     
-    if(!is.null(group)) {
-        if(length(group)>length(df[df$parameter=="ideal_point_1d","name"])) stop("'group' is not valid. Check whether it excluded the legislators who failed minimum votes requirement.\n")
-        if(length(group)<length(df[df$parameter=="ideal_point_1d","name"])) stop("'group' is not valid. Check whether it included all the legislators from the analysis.\n")
+    if(!is.null(color.group)) {
+        if(length(color.group)>length(df[df$parameter=="ideal_point_1d","name"])) stop("'color.group' is not valid. Check whether it excluded the legislators who failed minimum votes requirement.\n")
+        if(length(color.group)<length(df[df$parameter=="ideal_point_1d","name"])) stop("'color.group' is not valid. Check whether it included all the legislators from the analysis.\n")
+    }
+    
+    if(!is.null(shape.group)) {
+        if(length(shape.group)>length(df[df$parameter=="ideal_point_1d","name"])) stop("'shape.group' is not valid. Check whether it excluded the legislators who failed minimum votes requirement.\n")
+        if(length(shape.group)<length(df[df$parameter=="ideal_point_1d","name"])) stop("'shape.group' is not valid. Check whether it included all the legislators from the analysis.\n")
     }
     
     if(dim==1) {
         ideal_df <- data.frame(ideal_point_1d = df[df$parameter=="ideal_point_1d","mean"],
                                name = df[df$parameter=="ideal_point_1d","name"],
                                stringsAsFactors = F)
-        ideal_df$group <- group
+        ideal_df$color.group <- color.group
+        ideal_df$shape.group <- shape.group
         ideal_df$order <- match(ideal_df$ideal_point_1d, sort(ideal_df$ideal_point_1d, decreasing = T)) 
         plot <- ggplot() + 
-            geom_text(aes(label = name, x = ideal_point_1d, y = order, col = group), data = ideal_df) +
+            geom_text(aes(label = name, x = ideal_point_1d, y = order, col = color.group, shape = shape.group), data = ideal_df) +
             theme_classic() +
             theme(axis.text.y = element_blank(),
                   axis.ticks.y = element_blank()) +
@@ -283,9 +317,10 @@ plot.l1ideal <- function(l1object,
                                    ideal_point_2d = df[df$parameter=="ideal_point_2d","mean"]*(1-df[df$parameter=="weight_1d","mean"]),
                                    name = df[df$parameter=="ideal_point_1d","name"],
                                    stringsAsFactors = F)
-            ideal_df$group <- group
+            ideal_df$color.group <- color.group
+            ideal_df$shape.group <- shape.group
             plot <- ggplot() + 
-                geom_point(aes(x = ideal_point_1d, y = ideal_point_2d, col = group, shape = group), data = ideal_df, alpha = 0.7) +
+                geom_point(aes(x = ideal_point_1d, y = ideal_point_2d, col = color.group, shape = shape.group), data = ideal_df, alpha = 0.7) +
                 theme_classic() +
                 labs(x="Dimension 1",y="Dimension 2",title="L1 Norm Ideal Point Estimation (weighted)")
         } else {
@@ -293,9 +328,10 @@ plot.l1ideal <- function(l1object,
                                    ideal_point_2d = df[df$parameter=="ideal_point_2d","mean"],
                                    name = df[df$parameter=="ideal_point_1d","name"],
                                    stringsAsFactors = F)
-            ideal_df$group <- group
+            ideal_df$color.group <- color.group
+            ideal_df$shape.group <- shape.group
             plot <- ggplot() + 
-                geom_point(aes(x = ideal_point_1d, y = ideal_point_2d, col = group, shape = group), data = ideal_df, alpha = 0.7) +
+                geom_point(aes(x = ideal_point_1d, y = ideal_point_2d, col = color.group, shape = shape.group), data = ideal_df, alpha = 0.7) +
                 theme_classic() +
                 labs(x="Dimension 1",y="Dimension 2",title="L1 Norm Ideal Point Estimation")
         }

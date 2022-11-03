@@ -27,7 +27,7 @@
 #' \item{true_beta}{}
 #' \item{code}{}
 #' 
-#' @references Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+#' @references Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
 #' @export generate.data
 
 generate.data <- function(dimensions = 2, 
@@ -123,7 +123,7 @@ rmvnorm <- function(n,mu,Sigma){
 #' @return 
 #' 
 #' @import ggplot2
-#' @references Sooahn Shin, Yohan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
+#' @references Sooahn Shin, Johan Lim, and Jong Hee Park 2019. "L1 norm Based Multidimensional Ideal Point Estimation: With Application to Roll Call Voting Data" Working Paper.
 #' @export plot.simulation
 
 plot.simulation <- function(synthetic_data,
@@ -148,7 +148,7 @@ plot.simulation <- function(synthetic_data,
             legend.position="none") +
       labs(x="Dimension 1",y=NULL,title="True Latent Space")
     
-    plot_res <- plot.l1ideal(l1object, group = ideal_df$group) + theme(legend.position="none")
+    plot_res <- plot.l1ideal(l1object, color.group = ideal_df$group, shape.group = ideal_df$group) + theme(legend.position="none")
     
     ideal_df$ideal_point_1d <- plot_res$layers[[1]]$data[,"ideal_point_1d"]
     
@@ -173,7 +173,7 @@ plot.simulation <- function(synthetic_data,
       theme(legend.position="none") +
       labs(x="Dimension 1",y="Dimension 2",title="True Latent Space (weighted)")
     
-    plot_res <- plot.l1ideal(l1object, group = ideal_df$group, weighted = TRUE) + theme(legend.position="none")
+    plot_res <- plot.l1ideal(l1object, color.group = ideal_df$group, shape.group = ideal_df$group, weighted = TRUE) + theme(legend.position="none")
     
     if (!coord_flip) {
       ideal_df$ideal_point_1d <- plot_res$layers[[1]]$data[,"ideal_point_1d"]

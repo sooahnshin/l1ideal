@@ -4,14 +4,14 @@
 \alias{plot.l1ideal}
 \title{Plot the l1ideal object}
 \usage{
-\method{plot}{l1ideal}(l1object, group = NULL, weighted = TRUE)
+\method{plot}{l1ideal}(l1object, color.group = NULL, shape.group = NULL, weighted = TRUE)
 }
 \arguments{
 \item{l1object}{An object of class \code{l1ideal}.}
 
-\item{group}{A vetor of an attribute of legislators for grouping. Note that the order of the attributes must corresponds to the order of legislators in voting matrix, while excluding the legislators who failed minimum vote requirements specified in \code{l1ideal} function. The default is \code{NULL}.}
-
 \item{weighted}{Logical. If \code{TRUE}, plot the product of each-dimensional coordinate of ideal point and dimensional weight. Otherwise, plot each-dimensional coordinate of ideal point. Only valid in two dimensional case. The default is \code{TRUE}.}
+
+\item{group}{A vetor of an attribute of legislators for grouping. Note that the order of the attributes must corresponds to the order of legislators in voting matrix, while excluding the legislators who failed minimum vote requirements specified in \code{l1ideal} function. The default is \code{NULL}.}
 }
 \value{
 A ggplot of ideal points estimated by l1 norm multidimensional ideal point model.

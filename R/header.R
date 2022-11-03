@@ -2,7 +2,7 @@
 
     packageStartupMessage("\n## ----------------------------------------- ##")
     packageStartupMessage("## L1 Norm Ideal Point Estimation Package")
-    packageStartupMessage("## Sooahn Shin, Yohan Lim, and Jong Hee Park")
+    packageStartupMessage("## Sooahn Shin, Johan Lim, and Jong Hee Park")
     packageStartupMessage("## ----------------------------------------- ##")
     
 }
