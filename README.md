@@ -1,11 +1,12 @@
 # l1ideal: L1 Norm Multidimensional Ideal Point Estimation
-[![Build Status](https://travis-ci.com/sooahnshin/l1ideal.svg?token=yMJkyPKby9ixFy1a4BPp&branch=master)](https://travis-ci.com/sooahnshin/l1ideal)
 
 ## Authors
-[Sooahn Shin](http://sooahnshin.com/), Johan Lim, [Jong Hee Park](http://jhp.snu.ac.kr/)
+- [Sooahn Shin](http://sooahnshin.com/), sooahnshin@g.harvard.edu (Creator)
+- Johan Lim
+- Jong Hee Park
 
 ## Paper
-Sooahn Shin, Johan Lim, and Jong Hee Park. "Multidimensional Ideal Point Estimation with L1 Distance: Model Identification and Posterior Consistency" Working Paper.
+Sooahn Shin, Johan Lim, and Jong Hee Park. "l1-based Bayesian Ideal Point Model for Multidimensional Politics" Working Paper.
 
 ## Installation
 
